@@ -6,3 +6,4 @@ spring:
       server:
         git:
           uri: https://github.com/liuruichao555/config-repo
+          clone-on-start: true
