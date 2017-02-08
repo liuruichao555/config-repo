@@ -5,5 +5,4 @@ spring:
     config:
       server:
         git:
-          uri:https://git.coding.net/tiangao/demo-config-server.git
-          clone-on-start: true
+          uri: https://github.com/liuruichao555/config-repo
