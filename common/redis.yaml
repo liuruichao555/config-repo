@@ -1,0 +1,46 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    run: redis
+  name: redis
+  namespace: test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      run: redis
+  template:
+    metadata:
+      labels:
+        run: redis
+    spec:
+      containers:
+      - image: redis
+        name: redis
+        envFrom:
+         - configMapRef:
+             name: redis-config
+        #volumeMounts:
+        #- name: config-volume
+        #  mountPath: /etc/config
+      #volumes:
+      #  - name: config-volume
+      #    configMap:
+      #      name: redis-config
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    run: redis
+  name: redis
+  namespace: test
+spec:
+  selector:
+    run: redis
+  type: ClusterIP
+  ports:
+  - port: 6379
+    protocol: TCP
+    targetPort: 6379
